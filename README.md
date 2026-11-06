@@ -1,4 +1,4 @@
-# StarryNight Theme (by JoanFo && Hallo123wert)
+# StarryNight Theme (by JoanFo & Hallo123wert)
 
 Who doesn't like the night, with flickering stars?
 
