@@ -1,19 +1,16 @@
 {
   "id": "starrynight",
   "name": "StarryNight",
-  "author": "JoanFo",
-  "version": "1.0.1",
+  "author": "JoanFo && Hallo123wert",
+  "version": "1.0.0",
   "description": "Who doesn't like the night, with flickering stars?",
   "category": "theme",
-  "url": "https://github.com/JoanFo1456/starrynight",
-  "update_url": "",
-  "namespace": "JoanFo\\StarryNight",
+  "url": "https://github.com/hallo123wert/starrynight",
+  "update_url": null,
+  "namespace": "Hallo123wert\\StarryNight",
   "class": "StarryNightPlugin",
-  "panels": [
-    "admin",
-    "server",
-    "app"
-  ],
+  "panels": null,
   "panel_version": null,
+  "api_version": 1,
   "composer_packages": null
 }

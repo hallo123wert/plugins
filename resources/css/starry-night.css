@@ -1,0 +1,165 @@
+:root {
+    --sn-bg: linear-gradient(135deg, #efe6ff 0%, #e6d1ff 45%, #ead6ff 100%);
+    --sn-star-color: #b86b1a;
+    --sn-star-glow: rgba(184, 107, 26, 0.35);
+    --sn-star-trail-color: rgba(184, 107, 26, 0.95);
+    --sn-meteor-color: #b86b1a;
+    --sn-border: rgba(26, 26, 46, 0.15);
+}
+
+html.dark {
+    --sn-bg: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+    --sn-star-color: #ffffff;
+    --sn-star-glow: rgba(255, 255, 255, 0.6);
+    --sn-star-trail-color: rgba(255, 255, 255, 0.9);
+    --sn-meteor-color: #ffffff;
+    --sn-border: rgba(255, 255, 255, 0.1);
+}
+
+html,
+body,
+body.fi-body {
+    background: var(--sn-bg) !important;
+    background-attachment: fixed !important;
+}
+
+.fi-modal,
+.fi-topbar,
+.fi-ta-ctn-header,
+.fi-ta-content,
+.fi-ta-ctn,
+.fi-ta-table,
+.fi-ta-header,
+.fi-ta-header-cell,
+.fi-ta-header-row,
+.fi-ta-body,
+.fi-ta-body .fi-ta-cell,
+.fi-ta-body .fi-ta-row,
+.fi-ta-body-row,
+.fi-sc-tabs,
+thead,
+thead th,
+thead tr,
+tbody,
+tbody td,
+tbody tr,
+.fi-section:not([class*="dropdown"]):not([class*="menu"]),
+.fi-card:not([class*="dropdown"]):not([class*="menu"]),
+.fi-widget:not([class*="dropdown"]):not([class*="menu"]),
+.fi-page:not([class*="dropdown"]):not([class*="menu"]),
+.fi-resource-page:not([class*="dropdown"]):not([class*="menu"]),
+[class*="fi-section"]:not([class*="dropdown"]):not([class*="menu"]),
+[class*="fi-card"]:not([class*="dropdown"]):not([class*="menu"]),
+[class*="fi-widget"]:not([class*="dropdown"]):not([class*="menu"]),
+[class*="fi-resource"]:not([class*="dropdown"]):not([class*="menu"]),
+[class*="fi-page"]:not([class*="dropdown"]):not([class*="menu"]) {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+.fi-section:not([class*="dropdown"]):not([class*="menu"]),
+.fi-card:not([class*="dropdown"]):not([class*="menu"]),
+.fi-widget:not([class*="dropdown"]):not([class*="menu"]),
+.fi-ta-content-grid {
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+}
+
+.fi-ta-filters .fi-dropdown-panel,
+.fi-ta-filter .fi-dropdown-panel,
+[class*="fi-ta-filter"] .fi-dropdown-panel,
+.fi-filters .fi-dropdown-panel,
+.fi-ta-header-actions .fi-dropdown-panel {
+    background: transparent !important;
+    backdrop-filter: blur(5px) !important;
+    border: 1px solid var(--sn-border) !important;
+    border-radius: 0.375rem !important;
+}
+
+.fi-main {
+    position: relative;
+    z-index: 20;
+}
+
+#starrynight-stars {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    pointer-events: none;
+}
+
+.static-star,
+.flickering-star {
+    position: absolute;
+    border-radius: 50%;
+    background: var(--sn-star-color);
+    box-shadow: 0 0 8px var(--sn-star-glow);
+    pointer-events: none;
+}
+
+.static-star {
+    opacity: 0.85;
+}
+
+.flickering-star {
+    animation: sn-flicker ease-in-out infinite;
+}
+
+@keyframes sn-flicker {
+    0%, 100% { opacity: 1;   transform: scale(1);   filter: brightness(1.6); }
+    50%      { opacity: 0.4; transform: scale(0.9); filter: brightness(0.8); }
+}
+
+.starrynight-meteors {
+    position: fixed;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.starrynight-meteors span {
+    position: absolute;
+    left: auto;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--sn-meteor-color);
+    box-shadow:
+        0 0 0 4px var(--sn-star-glow),
+        0 0 0 8px var(--sn-star-glow),
+        0 0 20px var(--sn-star-glow);
+    animation: sn-meteor 3s linear infinite;
+}
+
+.starrynight-meteors span::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 300px;
+    height: 1px;
+    transform: translateY(-50%);
+    background: linear-gradient(90deg, var(--sn-star-trail-color), transparent);
+}
+
+@keyframes sn-meteor {
+    0%   { transform: rotate(315deg) translateX(0);       opacity: 1; }
+    70%  { opacity: 1; }
+    100% { transform: rotate(315deg) translateX(-1000px); opacity: 0; }
+}
+
+.starrynight-meteors span:nth-child(1)  { top: 0;     right: 0;      animation-delay: 0s;    animation-duration: 1s; }
+.starrynight-meteors span:nth-child(2)  { top: 0;     right: 80px;   animation-delay: 0.2s;  animation-duration: 3s; }
+.starrynight-meteors span:nth-child(3)  { top: 80px;  right: 0;      animation-delay: 0.4s;  animation-duration: 2s; }
+.starrynight-meteors span:nth-child(4)  { top: 0;     right: 180px;  animation-delay: 0.6s;  animation-duration: 1.5s; }
+.starrynight-meteors span:nth-child(5)  { top: 0;     right: 400px;  animation-delay: 0.8s;  animation-duration: 2.5s; }
+.starrynight-meteors span:nth-child(6)  { top: 0;     right: 600px;  animation-delay: 1s;    animation-duration: 3s; }
+.starrynight-meteors span:nth-child(7)  { top: 300px; right: 0;      animation-delay: 1.2s;  animation-duration: 1.75s; }
+.starrynight-meteors span:nth-child(8)  { top: 0;     right: 700px;  animation-delay: 1.4s;  animation-duration: 1.25s; }
+.starrynight-meteors span:nth-child(9)  { top: 0;     right: 1000px; animation-delay: 0.75s; animation-duration: 2.25s; }
+.starrynight-meteors span:nth-child(10) { top: 0;     right: 450px;  animation-delay: 2.75s; animation-duration: 2.75s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .starrynight-meteors { display: none; }
+    .flickering-star { animation: none; }
+}
