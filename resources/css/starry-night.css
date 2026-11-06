@@ -124,6 +124,7 @@ tbody tr,
     width: 4px;
     height: 4px;
     border-radius: 50%;
+    opacity: 0;
     background: var(--sn-meteor-color);
     box-shadow:
         0 0 0 4px var(--sn-star-glow),
