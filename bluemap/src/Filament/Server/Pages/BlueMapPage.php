@@ -15,6 +15,8 @@ class BlueMapPage extends Page
 
     protected string $view = 'bluemap::map';
 
+    protected static ?int $navigationSort = 31;
+
     public static function getNavigationLabel(): string
     {
         return trans('bluemap::strings.navigation');
@@ -46,10 +48,20 @@ class BlueMapPage extends Page
     {
         $server = Filament::getTenant();
 
-        $base = $server instanceof Server
-            ? route('bluemap.proxy', ['uuid' => $server->uuid])
-            : '';
+        if (! $server instanceof Server) {
+            return '';
+        }
 
-        return rtrim($base, '/').'/';
+        $allocation = app(BlueMapPortResolver::class)->getAllocation($server);
+
+        if ($allocation === null) {
+            return '';
+        }
+
+        $host = config('bluemap.use_alias') && $allocation->ip_alias
+            ? $allocation->ip_alias
+            : $allocation->ip;
+
+        return "http://{$host}:{$allocation->port}/";
     }
 }
