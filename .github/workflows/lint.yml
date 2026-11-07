@@ -68,8 +68,8 @@ jobs:
 
       - name: Move plugin folders and phpstan.neon
         run: |
-          mkdir -p pelican/plugins/starrynight
-          rsync -av ./ pelican/plugins/starrynight/ --exclude=pelican --exclude=.git --exclude=.github
+          mkdir -p pelican/plugins
+          rsync -av --progress ./ pelican/plugins/ --exclude=pelican
           cp phpstan.neon pelican/phpstan.neon
 
       - name: Run PHPStan Analysis
