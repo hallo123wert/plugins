@@ -3,7 +3,7 @@
   "name": "BlueMap",
   "author": "Hallo123wert",
   "version": "1.0.0",
-  "description": "Shows the BlueMap web map of a Minecraft server directly in the server panel.",
+  "description": "Show the BlueMap web map of a Minecraft server directly in the server panel.",
   "category": "plugin",
   "url": null,
   "update_url": null,

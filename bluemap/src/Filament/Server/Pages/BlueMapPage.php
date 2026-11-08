@@ -2,6 +2,7 @@
 
 namespace Hallo123wert\BlueMap\Filament\Server\Pages;
 
+use App\Enums\ContainerStatus;
 use App\Models\Server;
 use Filament\Facades\Filament;
 use Filament\Pages\Page;
@@ -17,6 +18,33 @@ class BlueMapPage extends Page
 
     protected static ?int $navigationSort = 31;
 
+    public bool $isServerRunning = false;
+
+    public function mount(): void
+    {
+        $this->refreshServerStatus();
+    }
+
+    private function getServer(): ?Server
+    {
+        $server = Filament::getTenant();
+
+        return $server instanceof Server ? $server : null;
+    }
+
+    private function checkServerStatus(): bool
+    {
+        $server = $this->getServer();
+
+        return $server !== null
+            && $server->retrieveStatus() === ContainerStatus::Running;
+    }
+
+    public function refreshServerStatus(): void
+    {
+        $this->isServerRunning = $this->checkServerStatus();
+    }
+
     public static function getNavigationLabel(): string
     {
         return trans('bluemap::strings.navigation');
@@ -29,33 +57,29 @@ class BlueMapPage extends Page
 
     public function getBlueMapPort(): int
     {
-        $server = Filament::getTenant();
+        $server = $this->getServer();
 
-        return $server instanceof Server
+        return $server !== null
             ? app(BlueMapPortResolver::class)->getPort($server)
             : BlueMapPortResolver::DEFAULT_PORT;
     }
 
-    public function hasAllocation(): bool
+    public function getMapUrl(): ?string
     {
-        $server = Filament::getTenant();
+        $server = $this->getServer();
 
-        return $server instanceof Server
-            && app(BlueMapPortResolver::class)->getAllocation($server) !== null;
-    }
-
-    public function getMapUrl(): string
-    {
-        $server = Filament::getTenant();
-
-        if (! $server instanceof Server) {
-            return '';
+        if ($server === null) {
+            return null;
         }
 
         $allocation = app(BlueMapPortResolver::class)->getAllocation($server);
 
         if ($allocation === null) {
-            return '';
+            return null;
+        }
+
+        if (request()->isSecure()) {
+            return rtrim(route('bluemap.proxy', ['uuid' => $server->uuid]), '/').'/';
         }
 
         $host = config('bluemap.use_alias') && $allocation->ip_alias
