@@ -20,7 +20,9 @@ class BlueMapPlugin implements HasPluginSettings, Plugin
 
     public function register(Panel $panel): void
     {
-        $panel->discoverPages(plugin_path($this->getId(), 'src/Filament/Server/Pages'),'Hallo123wert\\BlueMap\\Filament\\Server\\Pages');
+        $id = str($panel->getId())->title();    
+    
+        $panel->discoverPages(plugin_path($this->getId(), "src/Filament/$id/Pages"), "Hallo123wert\\BlueMap\\Filament\\$id\\Pages");
     }
 
     public function boot(Panel $panel): void {}
