@@ -1,0 +1,16 @@
+{
+  "id": "bluemap",
+  "name": "BlueMap",
+  "author": "Hallo123wert",
+  "version": "1.0.0",
+  "description": "Show the BlueMap web map of a Minecraft server directly in the server panel.",
+  "category": "plugin",
+  "url": null,
+  "update_url": null,
+  "namespace": "Hallo123wert\\BlueMap",
+  "class": "BlueMapPlugin",
+  "panels": ["server"],
+  "panel_version": null,
+  "api_version": 1,
+  "composer_packages": null
+}
