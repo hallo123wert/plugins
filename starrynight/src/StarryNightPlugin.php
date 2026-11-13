@@ -3,13 +3,12 @@
 namespace Hallo123wert\StarryNight;
 
 use App\Contracts\Plugins\HasTheme;
-use Filament\Contracts\Plugin;
 use Filament\Panel;
 use Filament\Support\Colors\Color;
 use Filament\View\PanelsRenderHook;
 use Illuminate\Support\Facades\File;
 
-class StarryNightPlugin implements HasTheme, Plugin
+class StarryNightPlugin implements HasTheme
 {
     public function getId(): string
     {
