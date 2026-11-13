@@ -36,7 +36,7 @@ class StarryNightPlugin implements HasTheme
         return null;
     }
 
-    public function getThemeViteEntry(): ?string
+    public function getThemeViteEntry(): string|array|null
     {
         return null;
     }
