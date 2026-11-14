@@ -6,7 +6,6 @@ use App\Contracts\Plugins\HasTheme;
 use Filament\Panel;
 use Filament\Support\Colors\Color;
 use Filament\View\PanelsRenderHook;
-use Illuminate\Support\Facades\File;
 
 class StarryNightPlugin implements HasTheme
 {
@@ -38,26 +37,19 @@ class StarryNightPlugin implements HasTheme
 
     public function getThemeViteEntry(): string|array|null
     {
-        return null;
+        return [
+            'plugins/starrynight/resources/css/starry-night.css',
+            'plugins/starrynight/resources/js/starry-night.js',
+        ];
     }
 
     public function getThemeRenderHooks(): array
     {
         return [
-            PanelsRenderHook::HEAD_END => fn (): string => '<style id="starrynight-css">' . $this->read('resources/css/starry-night.css') . '</style>',
-
             PanelsRenderHook::BODY_START => fn (): string => '<section class="starrynight-meteors">'
                 . str_repeat('<span></span>', 10)
                 . '</section>'
-                . '<div id="starrynight-stars"></div>'
-                . '<script>' . $this->read('resources/js/starry-night.js') . '</script>',
+                . '<div id="starrynight-stars"></div>',
         ];
-    }
-
-    private function read(string $relativePath): string
-    {
-        $file = plugin_path($this->getId(), $relativePath);
-
-        return File::exists($file) ? File::get($file) : '';
     }
 }
